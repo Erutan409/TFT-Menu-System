@@ -1,5 +1,4 @@
-#include <Elegoo_TFTLCD.h>
-// TouchScreen - Version: Latest 
+#include <Adafruit_TFTLCD.h> 
 #include <TouchScreen.h>
 #include <EEPROM.h>
 
@@ -8,10 +7,11 @@
 #define YM 9   // can be a digital pin
 #define XP 8   // can be a digital pin
 
-#define TS_MINX 150
-#define TS_MINY 120
+// touch calibrated
+#define TS_MINX 190
+#define TS_MINY 190
 #define TS_MAXX 920
-#define TS_MAXY 940
+#define TS_MAXY 920
 
 // Assign human-readable names to some common 16-bit color values:
 #define BLACK   0x0000
@@ -52,7 +52,7 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 #define YELLOW          0xFFE0 
 #define WHITE           0xFFFF
 
-Elegoo_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
 int i = 0;
 int page = 0;
@@ -117,10 +117,9 @@ void setup(void) {
   awakeend = sleeptime + 1000; // set the current sleep time based on what the saved settings in EEPROM were
   Serial.begin(9600);
   Serial.println("TFT Menu");
-  Serial.println("Michael Keyser TFT Fork (Jeremy Saglimbeni  -  2011)");
   
   tft.reset();
-  uint16_t identifier = 0x9341; // specific driver for the Elegoo TFT
+  uint16_t identifier = 0x9341; 
   tft.begin(identifier); 
   tft.fillScreen(BLACK);
   tft.setRotation(1);
@@ -1037,4 +1036,3 @@ void drawhomeiconred() { // draws a red home icon
 void clearmessage() {
   tft.fillRect(12, 213, 226, 16, BLACK); // black out the inside of the message box
 }
-
